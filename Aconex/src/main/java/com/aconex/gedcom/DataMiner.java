@@ -9,24 +9,24 @@ import com.aconex.gedcom.util.StringUtil;
 
 /**
  * extracts elemental data from the genealogical raw data file.
- * 
+ *
  * @author tmishr
  */
 public final class DataMiner {
 
 	// -------- class variables -----------
 	/** raw data. **/
-	private String data;
+	private final String data;
 
 	/** logger. **/
-	private final static Logger LOGGER = Logger.getLogger(DataMiner.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(DataMiner.class.getName());
 
 	// -------- constructor -----------
 	/**
 	 * Creates an instance.
-	 * 
+	 *
 	 * @param 	rawData
-	 * 			raw genealogical data 
+	 * 			raw genealogical data
 	 */
 	public DataMiner(final String rawData) {
 		this.data = rawData;
@@ -40,15 +40,15 @@ public final class DataMiner {
 	 * <pre>
 	 * 	0 @I1@ INDI
 	 * </pre>
-	 *  
+	 *
 	 * @return 	depth of the node in the tree.
-	 * @throws	BusinessException
-	 * 			if the level is blank.
+	 * @throws		BusinessException
+	 * 				if the level is blank.
 	 */
 	public int parseLevel() {
-		String level = String.valueOf(data.charAt(0));
+		final String level = String.valueOf(data.charAt(0));
 		if (StringUtil.isBlank(level)) {
-			String errorMessage = "improper raw data. Missing level. " + data;
+			final String errorMessage = "improper raw data. Missing level. " + data;
 			LOGGER.log(Level.FINER, errorMessage);
 			throw new BusinessException(errorMessage);
 		}
@@ -61,13 +61,13 @@ public final class DataMiner {
 	 * <pre>
 	 * 	0 @I1@ INDI
 	 * </pre>
-	 * 
+	 *
 	 * @return 	id.
 	 * 			null, if no matches found.
 	 */
 	public String parseId() {
-		Pattern pattern = Pattern.compile("@(.*?)@");
-		Matcher matcher = pattern.matcher(data);
+		final Pattern pattern = Pattern.compile("@(.*?)@");
+		final Matcher matcher = pattern.matcher(data);
 		if (matcher.find()) {
 			return matcher.group();
 		}
@@ -80,16 +80,16 @@ public final class DataMiner {
 	 * <pre>
 	 * 	1 NAME Jamis Gordon /Buck/
 	 * </pre>
-	 * 
+	 *
 	 * @return 	tag name.
 	 * 			null, if no matches found.
 	 */
 	public String parseTag() {
-		Pattern pattern = Pattern.compile("(\\s+[A-Z]{4}\\b)|(\\s+[A-Z]{3}\\b)");
-		Matcher matcher = pattern.matcher(data);
+		final Pattern pattern = Pattern.compile("(\\s+[A-Z]{4}\\b)|(\\s+[A-Z]{3}\\b)");
+		final Matcher matcher = pattern.matcher(data);
 
 		while (matcher.find()) {
-			String tag = matcher.group();
+			final String tag = matcher.group();
 			if (!StringUtil.isBlank(tag)) {
 				return tag.trim();
 			}
@@ -103,7 +103,9 @@ public final class DataMiner {
 	 * <pre>
 	 * 	0 @I1@ INDI
 	 * </pre>
-	 * 
+	 *
+	 * @param	id
+	 * 			data id.
 	 * @return 	the element value.
 	 */
 	public String parseIdValue(String id) {
@@ -111,11 +113,11 @@ public final class DataMiner {
 			id = parseId();
 		}
 		if (StringUtil.isBlank(id)) {
-			String errorMessage = "Improper data. Id not found.";
+			final String errorMessage = "Improper data. Id not found.";
 			LOGGER.log(Level.FINER, errorMessage);
 			throw new BusinessException(errorMessage);
 		}
-		int index = data.indexOf(id);
+		final int index = data.indexOf(id);
 		return data.substring(index + id.length()).trim();
 	}
 
@@ -125,7 +127,9 @@ public final class DataMiner {
 	 * <pre>
 	 * 	1 NAME Jamis Gordon /Buck/
 	 * </pre>
-	 * 
+	 *
+	 * @param	tag
+	 * 			tag value.
 	 * @return 	the element value.
 	 */
 	public String parseTagValue(String tag) {
@@ -134,11 +138,11 @@ public final class DataMiner {
 		}
 
 		if (StringUtil.isBlank(tag)) {
-			String errorMessage = "Improper data. Tag name of length 3 to 4 chars not found.";
+			final String errorMessage = "Improper data. Tag name of length 3 to 4 chars not found.";
 			LOGGER.log(Level.FINER, errorMessage);
 			throw new BusinessException(errorMessage);
 		}
-		int index = data.indexOf(tag);
+		final int index = data.indexOf(tag);
 		return data.substring(index + tag.length()).trim();
 	}
 }

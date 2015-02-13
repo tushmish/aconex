@@ -13,7 +13,7 @@ import com.aconex.gedcom.node.test.ChildNodeCreatorTest;
 import com.aconex.gedcom.node.test.NodeFactoryTest;
 import com.aconex.gedcom.node.test.ParentNodeCreatorTest;
 import com.aconex.gedcom.node.test.SubChildNodeCreatorTest;
-import com.aconex.gedcom.util.StringUtilTest;
+import com.aconex.gedcom.util.test.StringUtilTest;
 
 /**
  * Test suite for Gedcom Parser.

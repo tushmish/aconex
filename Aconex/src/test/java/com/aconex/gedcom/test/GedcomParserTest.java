@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.aconex.gedcom.test;
 
@@ -18,7 +18,7 @@ import com.aconex.gedcom.GedcomParser;
 
 /**
  * Test class for the methods in the class  {@link com.aconex.gedcom.GedcomParser}.
- * 
+ *
  * @author tmishr
  */
 public class GedcomParserTest {
@@ -31,7 +31,7 @@ public class GedcomParserTest {
 
 	/**
 	 * Test method for {@link com.aconex.gedcom.GedcomParser#main(java.lang.String[])}.<p/>
-	 * 
+	 *
 	 * Condition - generates xml using default configuration. <p/>
 	 * expected	-  xml file named 'gedcom.xml' <p/>
 	 * actual	- generated file name 'gedcom.xml'. <p/>
@@ -39,24 +39,24 @@ public class GedcomParserTest {
 	@Test
 	public final void testMainWithoutConfigFile() {
 		GedcomParser.main(new String[] {});
-		File file = new File("gedcom.xml");
+		final File file = new File("gedcom.xml");
 		assertTrue("file must exist.", file.exists());
 		file.delete();
 	}
 
 	/**
 	 * Test method for {@link com.aconex.gedcom.GedcomParser#main(java.lang.String[])}.<p/>
-	 * 
+	 *
 	 * Condition - load external config file. <p/>
 	 * expected	-  xml file as mentioned in the config file <p/>
 	 * actual	- generated xml file as mentioned in the config file. <p/>
 	 */
 	@Test
 	public final void testMainWithConfigFile() throws IOException {
-		String configFilepath = "/Users/tmishr/dev/workspace_luna/Aconex/src/test/resources/test-config.properties";
-		String outputFilepath = "/Users/tmishr/dev/workspace_luna/Aconex/src/test/resources/output-data.xml";
+		final String configFilepath = "src/test/resources/test-config.properties";
+		final String outputFilepath = "src/test/resources/output-data.xml";
 		GedcomParser.main(new String[] { configFilepath });
-		File file = new File(outputFilepath);
+		final File file = new File(outputFilepath);
 		file.createNewFile();
 		assertTrue("file must exist.", file.exists());
 		file.delete();
@@ -64,7 +64,7 @@ public class GedcomParserTest {
 
 	/**
 	 * Test method for {@link com.aconex.gedcom.GedcomParser#main(java.lang.String[])}.
-	 * 
+	 *
 	 * Condition - execute with >1 arguments. <p/>
 	 * expected	-  system failure <p/>
 	 * actual	- system failure. <p/>
@@ -77,7 +77,7 @@ public class GedcomParserTest {
 
 	/**
 	 * Test method for {@link com.aconex.gedcom.GedcomParser#main(java.lang.String[])}.
-	 * 
+	 *
 	 * Condition - argument is not a file path. its just a string. <p/>
 	 * expected	-  BusinessException <p/>
 	 * actual	- BusinessException. <p/>
@@ -90,7 +90,7 @@ public class GedcomParserTest {
 
 	/**
 	 * Test method for {@link com.aconex.gedcom.GedcomParser#main(java.lang.String[])}.
-	 * 
+	 *
 	 * Condition - unsupported file format. <p/>
 	 * expected	-  BusinessException <p/>
 	 * actual	- BusinessException. <p/>
@@ -98,7 +98,7 @@ public class GedcomParserTest {
 	@Test
 	public final void testMainWithUnsupportedFileFormat() {
 		thrown.expect(BusinessException.class);
-		String path = "/Users/tmishr/dev/workspace_luna/Aconex/src/test/resources/test-config-json.properties";
+		final String path = "/Users/tmishr/dev/workspace_luna/Aconex/src/test/resources/test-config-json.properties";
 		GedcomParser.main(new String[] { path });
 	}
 

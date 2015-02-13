@@ -11,27 +11,27 @@ import com.aconex.gedcom.TreeNode;
 import com.aconex.gedcom.util.StringUtil;
 
 /**
- * Class to format data at level 2. No validations apply on data as the raw data is already passed through validation at the time of reading and 
+ * Class to format data at level 2. No validations apply on data as the raw data is already passed through validation at the time of reading and
  * transforming it into a TreeNode.
- * 
+ *
  * For validation refer (@link com.aconex.gedcom.node.SubChildNodeCreator#validate())
- *  
+ *
  * @author tmishr
  */
 public class Level2ElementFormatter implements XMLFormattable {
 
 	// -------- class variables -----------
 	/** sub child node. **/
-	private TreeNode node;
+	private final TreeNode node;
 
 	/** logger. **/
-	private final static Logger LOGGER = Logger.getLogger(Level2ElementFormatter.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Level2ElementFormatter.class.getName());
 
 	// -------- constructor -----------
 
 	/**
 	 * Creates an instance.
-	 * 
+	 *
 	 * @param 	node
 	 * 			node.
 	 */
@@ -42,22 +42,23 @@ public class Level2ElementFormatter implements XMLFormattable {
 	// -------- methods -----------
 	/**
 	 * formats node data as below.
-	 * 
+	 *
 	 * <pre>
 	 * {@code
 	 * 	<surn>Buck</surn>
 	 * }
 	 * </pre>
-	 * 
-	 * @return 	formatted parent node.
-	 * @throws 	XMLStreamException
-	 * 			in case of error. 
+	 *
+	 * @param	writer
+	 * 			XML writer.
+	 * @throws XMLStreamException
+	 * 			in case of error.
 	 */
 	@Override
-	public void format(XMLStreamWriter writer) throws XMLStreamException {
-		String elementName = getNode().getElementName();
+	public final void format(final XMLStreamWriter writer) throws XMLStreamException {
+		final String elementName = getNode().getElementName().toLowerCase();
 		if (StringUtil.isBlank(elementName)) {
-			String errorMessage = "malformed node. Element name is missing. " + node;
+			final String errorMessage = "malformed node. Element name is missing. " + node;
 			LOGGER.log(Level.FINER, errorMessage);
 			throw new BusinessException(errorMessage);
 		}
@@ -69,7 +70,7 @@ public class Level2ElementFormatter implements XMLFormattable {
 
 	/**
 	 * returns the child node.
-	 * 
+	 *
 	 * @return the child node.
 	 */
 	private TreeNode getNode() {

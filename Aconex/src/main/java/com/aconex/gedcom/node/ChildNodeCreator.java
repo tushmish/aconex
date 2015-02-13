@@ -9,12 +9,12 @@ import com.aconex.gedcom.TreeNode;
 import com.aconex.gedcom.util.StringUtil;
 
 /**
- * Creates a node from the raw data of the format 
- * 
+ * Creates a node from the raw data of the format.
+ *
  * <pre>
  * 	1 NAME Jamis Gordon /Buck/
- * </pre> 
- * 
+ * </pre>
+ *
  * @see com.aconex.gedcom.DataMiner
  * @author tmishr
  */
@@ -22,15 +22,17 @@ public final class ChildNodeCreator implements NodeCreatable {
 
 	// -------- class variables -----------
 	/** raw data. **/
-	private DataMiner dataMiner;
+	private final DataMiner dataMiner;
 
 	/** logger. **/
-	private final static Logger LOGGER = Logger.getLogger(ChildNodeCreator.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ChildNodeCreator.class.getName());
 
 	// -------- constructor -----------
 	/**
 	 * Validates data before creating an instance.
-	 * 
+	 *
+	 * @param	data
+	 * 			raw data representing an element.
 	 * @throws	BusinessException
 	 * 			if the tag is blank.
 	 */
@@ -41,19 +43,19 @@ public final class ChildNodeCreator implements NodeCreatable {
 
 	// -------- methods -----------
 	/**
-	 * creates a child TreeNode (level 1) representation of a single line of data as string 
-	 * from the file containing Genealogical data.The properties set are 
-	 * elementName as tag {@link com.aconex.gedcom.DataMiner#parseTag()}  
+	 * creates a child TreeNode (level 1) representation of a single line of data as string
+	 * from the file containing Genealogical data.The properties set are
+	 * elementName as tag {@link com.aconex.gedcom.DataMiner#parseTag()}
 	 * and attribute name "value" with tagValue as value. {@link com.aconex.gedcom.DataMiner#parseTagValue(String)()}.
-	 * 
-	 * @return	tree node.  
+	 *
+	 * @return	tree node.
 	 * @author 	tmishr
 	 */
 	@Override
 	public TreeNode create() {
-		TreeNode node = new TreeNode();
+		final TreeNode node = new TreeNode();
 		node.setLevel(getDataMiner().parseLevel());
-		String tag = getDataMiner().parseTag();
+		final String tag = getDataMiner().parseTag();
 		node.setElementName(tag);
 		node.addAttribute(TreeNode.ATTRIBUTE_VALUE, getDataMiner().parseTagValue(tag));
 		return node;
@@ -61,16 +63,16 @@ public final class ChildNodeCreator implements NodeCreatable {
 
 	/**
 	 * Validates raw data before creating a node.
-	 * 
+	 *
 	 * @param 	data
 	 * 			the raw data.
 	 * @throws	BusinessException
 	 * 			if the tag is blank.
 	 */
 	private void validate(final String data) {
-		String tag = getDataMiner().parseTag();
+		final String tag = getDataMiner().parseTag();
 		if (StringUtil.isBlank(tag)) {
-			String errorMessage = "malformed node. Tag is empty. Raw data:" + data;
+			final String errorMessage = "malformed node. Tag is empty. Raw data:" + data;
 			LOGGER.log(Level.FINER, errorMessage);
 			throw new BusinessException(errorMessage);
 		}
@@ -80,7 +82,7 @@ public final class ChildNodeCreator implements NodeCreatable {
 
 	/**
 	 * returns data miner.
-	 * 
+	 *
 	 * @return data miner.
 	 */
 	private DataMiner getDataMiner() {

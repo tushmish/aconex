@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * Node representing a Genealogical data. Acts as a placeholder to render data in XML format.
- * 
+ *
  * @author tmishr
  */
 public final class TreeNode {
@@ -24,7 +24,7 @@ public final class TreeNode {
 	private String value = "";
 
 	/** attributes key value pair. **/
-	private Map<String, String> attributeKeyValues = new HashMap<String, String>();
+	private final Map<String, String> attributeKeyValues = new HashMap<String, String>();
 
 	/** child nodes for this element. **/
 	private List<TreeNode> childNodes = new ArrayList<TreeNode>();
@@ -39,7 +39,7 @@ public final class TreeNode {
 
 	/**
 	 * checks if the node has child nodes.
-	 * 
+	 *
 	 * @return 	true, if yes
 	 * 			false, otherwise
 	 */
@@ -52,7 +52,7 @@ public final class TreeNode {
 
 	/**
 	 * adds a node as a child.
-	 * 
+	 *
 	 * @param 	childNode
 	 * 			child node.
 	 */
@@ -61,29 +61,29 @@ public final class TreeNode {
 	}
 
 	/**
-	 * adds an attribute name and value pair that can be used in xml 
-	 *  
+	 * adds an attribute name and value pair that can be used in xml.
+	 *
 	 * @param 	key
 	 * 			attribute name
 	 * @param 	value
 	 * 			attribute value
 	 */
 	public void addAttribute(final String key, final String value) {
-		attributeKeyValues.put(key, value);
+		getAttributeKeyValues().put(key, value);
 	}
 
 	/**
 	 * gets attribute value.
-	 * 
+	 *
 	 * @param 	key
 	 * 			attribute name
 	 * @return	attribute value.
 	 */
 	public String getValue(final String key) {
-		if (!attributeKeyValues.containsKey(key)) {
+		if (!getAttributeKeyValues().containsKey(key)) {
 			return null;
 		}
-		return attributeKeyValues.get(key);
+		return getAttributeKeyValues().get(key);
 	}
 
 	/* (non-Javadoc)
@@ -94,7 +94,7 @@ public final class TreeNode {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((attributeKeyValues == null) ? 0 : attributeKeyValues.hashCode());
+				+ ((getAttributeKeyValues() == null) ? 0 : getAttributeKeyValues().hashCode());
 		result = prime * result + ((childNodes == null) ? 0 : childNodes.hashCode());
 		result = prime * result + ((elementName == null) ? 0 : elementName.hashCode());
 		result = prime * result + level;
@@ -106,53 +106,67 @@ public final class TreeNode {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
+	public boolean equals(final Object obj) {
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
-		TreeNode other = (TreeNode) obj;
-		if (attributeKeyValues == null) {
-			if (other.attributeKeyValues != null)
+		}
+		final TreeNode other = (TreeNode) obj;
+		if (getAttributeKeyValues() == null) {
+			if (other.getAttributeKeyValues() != null) {
 				return false;
-		} else if (!attributeKeyValues.equals(other.attributeKeyValues))
+			}
+		} else if (!getAttributeKeyValues().equals(other.getAttributeKeyValues())) {
 			return false;
+		}
 		if (childNodes == null) {
-			if (other.childNodes != null)
+			if (other.childNodes != null) {
 				return false;
-		} else if (!childNodes.equals(other.childNodes))
+			}
+		} else if (!childNodes.equals(other.childNodes)) {
 			return false;
+		}
 		if (elementName == null) {
-			if (other.elementName != null)
+			if (other.elementName != null) {
 				return false;
-		} else if (!elementName.equals(other.elementName))
+			}
+		} else if (!elementName.equals(other.elementName)) {
 			return false;
-		if (level != other.level)
+		}
+		if (level != other.level) {
 			return false;
+		}
 		if (value == null) {
-			if (other.value != null)
+			if (other.value != null) {
 				return false;
-		} else if (!value.equals(other.value))
+			}
+		} else if (!value.equals(other.value)) {
 			return false;
+		}
 		return true;
 	}
 
 	/**
 	 * String representation of a node.
+	 *
+	 * @return node as string.
 	 */
 	@Override
 	public String toString() {
 		return "TreeNode [level=" + level + ", elementName=" + elementName + ", value=" + value
-				+ ", attributeKeyValues=" + attributeKeyValues + "]";
+				+ ", attributeKeyValues=" + getAttributeKeyValues() + "]";
 	}
 
 	// -------- getters and setters -----------
 
 	/**
 	 * gets level.
-	 * 
+	 *
 	 * @return the level
 	 */
 	public int getLevel() {
@@ -161,7 +175,7 @@ public final class TreeNode {
 
 	/**
 	 * sets the level.
-	 * 
+	 *
 	 * @param 	level
 	 *          the level to set
 	 */
@@ -171,7 +185,7 @@ public final class TreeNode {
 
 	/**
 	 * gets element name.
-	 * 
+	 *
 	 * @return the element name.
 	 */
 	public String getElementName() {
@@ -180,17 +194,17 @@ public final class TreeNode {
 
 	/**
 	 * sets the element name.
-	 * 
+	 *
 	 * @param 	elementName
 	 *          element name
 	 */
-	public void setElementName(String elementName) {
+	public void setElementName(final String elementName) {
 		this.elementName = elementName;
 	}
 
 	/**
 	 * gets node value.
-	 * 
+	 *
 	 * @return the node value
 	 */
 	public String getValue() {
@@ -199,7 +213,7 @@ public final class TreeNode {
 
 	/**
 	 * sets the node value.
-	 * 
+	 *
 	 * @param 	value
 	 *          node value
 	 */
@@ -209,7 +223,7 @@ public final class TreeNode {
 
 	/**
 	 * gets child nodes.
-	 * 
+	 *
 	 * @return the child nodes
 	 */
 	public List<TreeNode> getChildNodes() {
@@ -218,12 +232,21 @@ public final class TreeNode {
 
 	/**
 	 * sets the child nodes.
-	 * 
+	 *
 	 * @param 	childNodes
 	 *          child nodes.
 	 */
 	public void setChildNodes(final List<TreeNode> childNodes) {
 		this.childNodes = childNodes;
+	}
+
+	/**
+	 * gets attribute key value pairs.
+	 *
+	 * @returns	attributes
+	 */
+	private Map<String, String> getAttributeKeyValues() {
+		return attributeKeyValues;
 	}
 
 }

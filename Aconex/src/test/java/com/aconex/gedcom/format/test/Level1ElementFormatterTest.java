@@ -59,7 +59,7 @@ public class Level1ElementFormatterTest {
 			while (streamReader.hasNext()) {
 				streamReader.next();
 				if (streamReader.getEventType() == XMLStreamReader.START_ELEMENT) {
-					assertEquals("element names must be same.", "testElement",
+					assertEquals("element names must be same.", "testelement",
 							streamReader.getLocalName());
 				}
 				if (streamReader.getEventType() == XMLStreamReader.ATTRIBUTE) {

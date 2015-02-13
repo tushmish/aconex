@@ -9,12 +9,12 @@ import com.aconex.gedcom.TreeNode;
 import com.aconex.gedcom.util.StringUtil;
 
 /**
- * Creates a node from the raw data of the format. 
+ * Creates a node from the raw data of the format.
  * Sample data.
  * <pre>
  * 	0 @I1@ INDI
- * </pre> 
- * 
+ * </pre>
+ *
  * @see com.aconex.gedcom.DataMiner
  * @author tmishr
  */
@@ -22,15 +22,17 @@ public final class ParentNodeCreator implements NodeCreatable {
 
 	// -------- class variables -----------
 	/** raw data miner. **/
-	private DataMiner dataMiner;
+	private final DataMiner dataMiner;
 
 	/** logger. **/
-	private final static Logger LOGGER = Logger.getLogger(ParentNodeCreator.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ParentNodeCreator.class.getName());
 
 	// -------- constructor -----------
 	/**
 	 * Validates data before creating an instance.
-	 * 
+	 *
+	 * @param	data
+	 * 			raw data representing an element.
 	 * @throws	BusinessException
 	 * 			if the tag and id are blank.
 	 */
@@ -41,25 +43,27 @@ public final class ParentNodeCreator implements NodeCreatable {
 
 	// -------- methods -----------
 	/**
-	 * creates a parent TreeNode (level 0) representation of a single line of data as string 
-	 * from the file containing Genealogical data.The properties set are 
-	 * attribute named "id" with value idValue {@link com.aconex.gedcom.DataMiner#parseId()}  
+	 * creates a parent TreeNode (level 0) representation of a single line of data as string
+	 * from the file containing Genealogical data.The properties set are
+	 * attribute named "id" with value idValue {@link com.aconex.gedcom.DataMiner#parseId()}
 	 * and elementName as idValue {@link com.aconex.gedcom.DataMiner#parseIdValue(String)()}.
-	 * 
+	 *
+	 * @return	a parent node
+	 *
 	 * @author tmishr
 	 */
 	@Override
 	public TreeNode create() {
-		TreeNode node = new TreeNode();
-		node.setLevel(getDataMiner().parseLevel());// parent node
-		String id = getDataMiner().parseId();
+		final TreeNode node = new TreeNode();
+		node.setLevel(getDataMiner().parseLevel()); // parent node
+		final String id = getDataMiner().parseId();
 		String value = "";
 		if (!StringUtil.isBlank(id)) {
 			node.addAttribute(TreeNode.ATTRIBUTE_ID, id);
 			value = getDataMiner().parseIdValue(id);
 			node.setElementName(value); // If an ID is given, the DATA is the type of the subtree that is identified.
 		} else {
-			String tag = getDataMiner().parseTag();
+			final String tag = getDataMiner().parseTag();
 			value = getDataMiner().parseTagValue(tag);
 			node.setElementName(tag);
 		}
@@ -68,17 +72,17 @@ public final class ParentNodeCreator implements NodeCreatable {
 
 	/**
 	 * Validates raw data before creating a parent node.
-	 * 
+	 *
 	 * @param 	data
 	 * 			the raw data.
 	 * @throws	BusinessException
 	 * 			if the tag and id are blank.
 	 */
 	private void validate(final String data) {
-		String id = getDataMiner().parseId();
-		String tag = getDataMiner().parseTag();
+		final String id = getDataMiner().parseId();
+		final String tag = getDataMiner().parseTag();
 		if (StringUtil.isBlank(id) && StringUtil.isBlank(tag)) {
-			String errorMessage = "malformed node. both id and tag name are empty. Raw data:"
+			final String errorMessage = "malformed node. both id and tag name are empty. Raw data:"
 					+ data;
 			LOGGER.log(Level.FINER, errorMessage);
 			throw new BusinessException(errorMessage);
@@ -89,7 +93,7 @@ public final class ParentNodeCreator implements NodeCreatable {
 
 	/**
 	 * returns data miner.
-	 * 
+	 *
 	 * @return data miner.
 	 */
 	private DataMiner getDataMiner() {

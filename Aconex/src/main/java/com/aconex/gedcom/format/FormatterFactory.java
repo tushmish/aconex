@@ -4,14 +4,23 @@ import com.aconex.gedcom.TreeNode;
 
 /**
  * Factory to create an XML formatter.
- * 
+ *
  * @author tmishr
  */
-public class FormatterFactory {
+public final class FormatterFactory {
+
+	// -------- constructor -----------
+	/**
+	 * Prevent instantiation as it is a utility class.
+	 */
+	private FormatterFactory() {
+	}
+
+	// -------- methods -----------
 
 	/**
 	 * Creates a formatter based on the node level.
-	 * 
+	 *
 	 * @param 	node
 	 * 			data as node.
 	 * @return	a xml formatter.

@@ -9,6 +9,13 @@ import java.util.logging.Logger;
 import com.aconex.gedcom.util.FileUtil;
 import com.aconex.gedcom.util.StringUtil;
 
+/**
+ * Loads configuration details such as output file format type, output file location and source file path
+ * to read data. If the path to the config file is specified, the details are read from the file. Otherwise, \
+ * default configuration is loaded.
+ *
+ * @author tushar
+ */
 public final class Configuration {
 
 	// -------- class variables -----------
@@ -41,7 +48,7 @@ public final class Configuration {
 	public static final String PATH_OUTPUT_FILE = "path.output.file";
 
 	/** logger. **/
-	private final static Logger LOGGER = Logger.getLogger(Configuration.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
 
 	// -------- methods -----------
 	/**
@@ -61,11 +68,11 @@ public final class Configuration {
 	}
 
 	/**
-	 * loads configuration from the external config file. 
+	 * loads configuration from the external config file.
 	 * 1. sets file format as mentioned in the file.
 	 * 2. reads genealogical data as mentioned in the file.
 	 * 3. sets output file as mentioned in the file.
-	 * 
+	 *
 	 * @param 	filePath
 	 * 			config file path
 	 */
@@ -77,13 +84,13 @@ public final class Configuration {
 			InputStream configFile = null;
 			try {
 				configFile = FileUtil.readFile(filePath);
-				Properties properties = new Properties();
+				final Properties properties = new Properties();
 				properties.load(configFile);
 				setFileFormat(properties.getProperty(OUTPUT_FILE_FORMAT));
 				setInputStream(FileUtil.readFile(properties.getProperty(PATH_INPUT_FILE)));
 				setOutputFile(properties.getProperty(PATH_OUTPUT_FILE));
 				configFile.close();
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				LOGGER.log(Level.FINER, e.getMessage(), e);
 				throw new BusinessException(e.getMessage(), e);
 			}
@@ -91,7 +98,7 @@ public final class Configuration {
 	}
 
 	/**
-	 * loads default configuration.This includes 
+	 * loads default configuration.This includes
 	 * 1. sets file format as XML
 	 * 2. reads genealogical data from the application classpath.
 	 */
@@ -99,7 +106,8 @@ public final class Configuration {
 		LOGGER.log(Level.WARNING,
 				"Configuration file path not specified. Loading default configuration.");
 		setFileFormat(DEFAULT_OUTPUT_FORMAT);
-		InputStream inputStream = Configuration.class.getResourceAsStream(DEFAULT_GEDCOM_DATA_FILE);
+		final InputStream inputStream = Configuration.class
+				.getResourceAsStream(DEFAULT_GEDCOM_DATA_FILE);
 		setInputStream(inputStream);
 		setOutputFile("");
 	}
@@ -107,7 +115,7 @@ public final class Configuration {
 	// -------- getters and setters -----------
 	/**
 	 * gets file format.
-	 * 
+	 *
 	 * @return file format.
 	 */
 	public String getFileFormat() {
@@ -116,13 +124,13 @@ public final class Configuration {
 
 	/**
 	 * sets file format. Validates file format.
-	 * 
+	 *
 	 * @param	fileFormat
-	 * 			file format.	
+	 * 			file format.
 	 */
 	private void setFileFormat(final String fileFormat) {
 		if (!FileFormat.isValidValue(fileFormat)) {
-			String errorMessage = "Unsupported file format.";
+			final String errorMessage = "Unsupported file format.";
 			LOGGER.log(Level.FINER, errorMessage);
 			throw new BusinessException(errorMessage);
 		}
@@ -132,7 +140,7 @@ public final class Configuration {
 
 	/**
 	 * gets output file.
-	 * 
+	 *
 	 * @return output file.
 	 */
 	public String getOutputFile() {
@@ -141,17 +149,17 @@ public final class Configuration {
 
 	/**
 	 * sets output file.
-	 * 
+	 *
 	 * @param	outputFile
-	 * 			file path.	
+	 * 			file path.
 	 */
-	private void setOutputFile(String outputFile) {
+	private void setOutputFile(final String outputFile) {
 		this.outputFile = outputFile;
 	}
 
 	/**
 	 * gets input stream.
-	 * 
+	 *
 	 * @return input stream.
 	 */
 	public InputStream getInputStream() {
@@ -159,12 +167,12 @@ public final class Configuration {
 	}
 
 	/**
-	 * sets input stream
-	 * 
+	 * sets input stream.
+	 *
 	 * @param	inputStream
-	 * 			input Stream.	
+	 * 			input Stream.
 	 */
-	private void setInputStream(InputStream inputStream) {
+	private void setInputStream(final InputStream inputStream) {
 		this.inputStream = inputStream;
 	}
 

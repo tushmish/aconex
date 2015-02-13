@@ -1,9 +1,11 @@
-package com.aconex.gedcom.util;
+package com.aconex.gedcom.util.test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import com.aconex.gedcom.util.StringUtil;
 
 public class StringUtilTest {
 

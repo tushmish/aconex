@@ -7,9 +7,11 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.aconex.gedcom.BusinessException;
+
 /**
  * Utility class for File I/O.
- * 
+ *
  * @author tmishr
  */
 public final class FileUtil {
@@ -17,7 +19,7 @@ public final class FileUtil {
 	// -------- class variables -----------
 
 	/** logger. **/
-	private final static Logger LOGGER = Logger.getLogger(FileUtil.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(FileUtil.class.getName());
 
 	// -------- constructor -----------
 	/**
@@ -29,36 +31,37 @@ public final class FileUtil {
 	// -------- methods -----------
 
 	/**
-	 * Opens a file stream to read data. 
-	 * 
+	 * Opens a file stream to read data.
+	 *
 	 * @param 	filePath
 	 * 			file to be read.
 	 * @return	file stream
-	 * @throws	FileNotFoundException
+	 * @throws	BusinessException
 	 * 			if file path is incorrect or file is not found.
 	 */
 	public static InputStream readFile(final String filePath) {
 		try {
 			return new FileInputStream(filePath);
-		} catch (FileNotFoundException e) {
+		} catch (final FileNotFoundException e) {
 			LOGGER.log(Level.FINER, e.getMessage(), e);
+			throw new BusinessException(e.getMessage(), e);
 		}
-		return null;
 	}
 
 	/**
-	 * closes file stream. 
-	 * 
+	 * closes file stream.
+	 *
 	 * @param 	stream
 	 * 			file stream.
-	 * @throws	IOException
+	 * @throws	BusinessException
 	 * 			in case of i/o operation failure.
 	 */
 	public static void close(final InputStream stream) {
 		try {
 			stream.close();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			LOGGER.log(Level.FINER, e.getMessage(), e);
+			throw new BusinessException(e.getMessage(), e);
 		}
 	}
 }

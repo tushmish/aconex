@@ -24,7 +24,7 @@ import com.aconex.gedcom.util.StringUtil;
 
 /**
  * Class to generate XML file. The data is represented as XML.
- * 
+ *
  * @author tmishr
  */
 public class XMLGenerator implements Generatable {
@@ -38,7 +38,7 @@ public class XMLGenerator implements Generatable {
 	public static final String DOCUMENT_ROOT = "gedcom";
 
 	/** logger. **/
-	private final static Logger LOGGER = Logger.getLogger(XMLGenerator.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(XMLGenerator.class.getName());
 
 	// -------- methods -----------
 
@@ -52,12 +52,12 @@ public class XMLGenerator implements Generatable {
 	 *	2 PLAC 17 Bruton Street, London, W1
 	 *	1 FAMC @F0003@
 	 * </pre>
-	 * 
-	 * The row with Level 0 i.e. the 1st row is marked as parent node. All subsequent nodes at 
-	 * the same level are marked as its children. In general, level n is the parent of all nodes at level n + 1. 
-	 * 
-	 * This TreeNode acts as a parent node which is further written as XML.{@link com.aconex.gedcom.format.XMLGenerator#writeXML}  
-	 * 
+	 *
+	 * The row with Level 0 i.e. the 1st row is marked as parent node. All subsequent nodes at
+	 * the same level are marked as its children. In general, level n is the parent of all nodes at level n + 1.
+	 *
+	 * This TreeNode acts as a parent node which is further written as XML.{@link com.aconex.gedcom.format.XMLGenerator#writeXML}
+	 *
 	 * @param 	filePath
 	 * 			path of the output file.
 	 * @param	data
@@ -68,19 +68,20 @@ public class XMLGenerator implements Generatable {
 	@Override
 	public void create(String filePath, final InputStream data) {
 		LOGGER.log(Level.INFO, "Generating XML...");
-		Map<Integer, TreeNode> mostRecentNodeMap = new HashMap<Integer, TreeNode>();
+		final Map<Integer, TreeNode> mostRecentNodeMap = new HashMap<Integer, TreeNode>();
 		if (StringUtil.isBlank(filePath)) {
 			filePath = DEFAULT_OUTPUT_FILE;
 		}
 
 		try {
-			XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-			File file = new File(filePath);
+			final XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
+			final File file = new File(filePath);
 			file.createNewFile();
-			XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileWriter(file));
+			final XMLStreamWriter writer = outputFactory
+					.createXMLStreamWriter(new FileWriter(file));
 			writer.writeStartDocument();
 			writer.writeStartElement(DOCUMENT_ROOT);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(data));
+			final BufferedReader reader = new BufferedReader(new InputStreamReader(data));
 			String line = "";
 			while ((line = reader.readLine()) != null) {
 				if (StringUtil.isBlank(line)) {
@@ -90,11 +91,11 @@ public class XMLGenerator implements Generatable {
 					writeXML(filePath, mostRecentNodeMap.get(0), writer);
 					mostRecentNodeMap.clear();
 				}
-				TreeNode node = NodeFactory.getInstance(line).create();
-				int level = node.getLevel();
-				int parentNodeLevel = level - 1;
+				final TreeNode node = NodeFactory.getInstance(line).create();
+				final int level = node.getLevel();
+				final int parentNodeLevel = level - 1;
 				if (parentNodeLevel >= 0 && mostRecentNodeMap.containsKey(parentNodeLevel)) {
-					TreeNode parentNode = mostRecentNodeMap.get(parentNodeLevel);
+					final TreeNode parentNode = mostRecentNodeMap.get(parentNodeLevel);
 					parentNode.addChild(node);
 				}
 				mostRecentNodeMap.put(level, node);
@@ -116,29 +117,30 @@ public class XMLGenerator implements Generatable {
 
 	/**
 	 * Creates an XML elemnet.If the node has child items, creates XML element recursively for each child.
-	 * 
+	 *
 	 * @param 	filePath
 	 * 			file on which the xml data needs to be created.
 	 * @param 	node
 	 * 			the parent node.
 	 * @param 	writer
-	 * 			xml writer.
+	 * 			XML writer.
 	 * @throws	BusinessException
 	 * 			in case of stream error.
 	 */
 	private void writeXML(final String filePath, final TreeNode node, final XMLStreamWriter writer) {
 		try {
 			FormatterFactory.getFormatter(node).format(writer);
-			List<TreeNode> childNodes = node.getChildNodes();
-			for (TreeNode child : childNodes) {
+			final List<TreeNode> childNodes = node.getChildNodes();
+			for (final TreeNode child : childNodes) {
 				if (node.hasChildNodes()) {
 					writeXML(filePath, child, writer);
 				}
 			}
 			writer.writeEndElement();
-		} catch (XMLStreamException ex) {
+		} catch (final XMLStreamException ex) {
 			LOGGER.log(Level.FINER, ex.getMessage(), ex);
 			throw new BusinessException(ex.getMessage(), ex);
 		}
 	}
+
 }
