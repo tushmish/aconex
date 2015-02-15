@@ -4,16 +4,16 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.aconex.gedcom.format.test.FormatterFactoryTest;
-import com.aconex.gedcom.format.test.Level0ElementFormatterTest;
-import com.aconex.gedcom.format.test.Level1ElementFormatterTest;
-import com.aconex.gedcom.format.test.Level2ElementFormatterTest;
-import com.aconex.gedcom.format.test.XMLGeneratorTest;
 import com.aconex.gedcom.node.test.ChildNodeCreatorTest;
 import com.aconex.gedcom.node.test.NodeFactoryTest;
 import com.aconex.gedcom.node.test.ParentNodeCreatorTest;
 import com.aconex.gedcom.node.test.SubChildNodeCreatorTest;
 import com.aconex.gedcom.util.test.StringUtilTest;
+import com.aconex.gedcom.xml.test.FormatterFactoryTest;
+import com.aconex.gedcom.xml.test.Level0ElementFormatterTest;
+import com.aconex.gedcom.xml.test.Level1ElementFormatterTest;
+import com.aconex.gedcom.xml.test.Level2ElementFormatterTest;
+import com.aconex.gedcom.xml.test.XMLGeneratorTest;
 
 /**
  * Test suite for Gedcom Parser.

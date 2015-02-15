@@ -1,4 +1,4 @@
-package com.aconex.gedcom.format.test;
+package com.aconex.gedcom.xml.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -22,7 +22,7 @@ import org.junit.rules.ExpectedException;
 
 import com.aconex.gedcom.BusinessException;
 import com.aconex.gedcom.TreeNode;
-import com.aconex.gedcom.format.Level2ElementFormatter;
+import com.aconex.gedcom.xml.Level2ElementFormatter;
 
 /**
  * The nodes used for formatting have already passed though validations.

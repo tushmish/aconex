@@ -1,4 +1,4 @@
-package com.aconex.gedcom.format.test;
+package com.aconex.gedcom.xml.test;
 
 import static org.junit.Assert.assertTrue;
 
@@ -7,17 +7,17 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
-import com.aconex.gedcom.format.XMLGenerator;
+import com.aconex.gedcom.xml.XMLGenerator;
 
 /**
- * Test class for the methods in the class  {@link com.aconex.gedcom.format.XMLGenerator}.
+ * Test class for the methods in the class  {@link com.aconex.gedcom.xml.XMLGenerator}.
  * 
  * @author tmishr
  */
 public class XMLGeneratorTest {
 
 	/**
-	 * Test method for {@link com.aconex.gedcom.format.XMLGenerator#create(String, InputStream)}.<p/>
+	 * Test method for {@link com.aconex.gedcom.xml.XMLGenerator#create(String, InputStream)}.<p/>
 	 * 
 	 * Condition - with output filepath and data as stream <p/>
 	 * expected	-  creates an xml <p/>

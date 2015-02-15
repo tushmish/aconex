@@ -1,31 +1,31 @@
 /**
  * 
  */
-package com.aconex.gedcom.format.test;
+package com.aconex.gedcom.xml.test;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import com.aconex.gedcom.TreeNode;
-import com.aconex.gedcom.format.FormatterFactory;
-import com.aconex.gedcom.format.Level0ElementFormatter;
-import com.aconex.gedcom.format.Level1ElementFormatter;
-import com.aconex.gedcom.format.Level2ElementFormatter;
-import com.aconex.gedcom.format.XMLFormattable;
+import com.aconex.gedcom.xml.FormatterFactory;
+import com.aconex.gedcom.xml.Level0ElementFormatter;
+import com.aconex.gedcom.xml.Level1ElementFormatter;
+import com.aconex.gedcom.xml.Level2ElementFormatter;
+import com.aconex.gedcom.xml.XMLFormattable;
 
 /**
- * Test class for the methods in the class  {@link com.aconex.gedcom.node.FormatterFactory}.
+ * Test class for the methods in the class  {@link com.aconex.gedcom.xml.FormatterFactory}.
  * 
  * @author tmishr
  */
 public class FormatterFactoryTest {
 
 	/**
-	 * Test method for {@link com.aconex.gedcom.format.FormatterFactory#getFormatter(com.aconex.gedcom.TreeNode)}. <p/>
+	 * Test method for {@link com.aconex.gedcom.xml.FormatterFactory#getFormatter(com.aconex.gedcom.TreeNode)}. <p/>
 	 * 
 	 * Condition - data with level 0 <p/>
-	 * expected	- an instance of Level0ElementFormatter {@link com.aconex.gedcom.format.Level0ElementFormatter}. <p/>
+	 * expected	- an instance of Level0ElementFormatter {@link com.aconex.gedcom.xml.Level0ElementFormatter}. <p/>
 	 * actual	- an instance of Level0ElementFormatter. <p/>
 	 */
 	@Test
@@ -37,10 +37,10 @@ public class FormatterFactoryTest {
 	}
 
 	/**
-	 * Test method for {@link com.aconex.gedcom.format.FormatterFactory#getFormatter(com.aconex.gedcom.TreeNode)}. <p/>
+	 * Test method for {@link com.aconex.gedcom.xml.FormatterFactory#getFormatter(com.aconex.gedcom.TreeNode)}. <p/>
 	 * 
 	 * Condition - data with level 1 <p/>
-	 * expected	- an instance of Level1ElementFormatter {@link com.aconex.gedcom.format.Level1ElementFormatter}. <p/>
+	 * expected	- an instance of Level1ElementFormatter {@link com.aconex.gedcom.xml.Level1ElementFormatter}. <p/>
 	 * actual	- an instance of Level1ElementFormatter. <p/>
 	 */
 	@Test
@@ -52,10 +52,10 @@ public class FormatterFactoryTest {
 	}
 
 	/**
-	 * Test method for {@link com.aconex.gedcom.format.FormatterFactory#getFormatter(com.aconex.gedcom.TreeNode)}. <p/>
+	 * Test method for {@link com.aconex.gedcom.xml.FormatterFactory#getFormatter(com.aconex.gedcom.TreeNode)}. <p/>
 	 * 
 	 * Condition - data with level 2 <p/>
-	 * expected	- an instance of Level2ElementFormatter {@link com.aconex.gedcom.format.Level2ElementFormatter}. <p/>
+	 * expected	- an instance of Level2ElementFormatter {@link com.aconex.gedcom.xml.Level2ElementFormatter}. <p/>
 	 * actual	- an instance of Level2ElementFormatter. <p/>
 	 */
 	@Test
@@ -67,10 +67,10 @@ public class FormatterFactoryTest {
 	}
 
 	/**
-	 * Test method for {@link com.aconex.gedcom.format.FormatterFactory#getFormatter(com.aconex.gedcom.TreeNode)}. <p/>
+	 * Test method for {@link com.aconex.gedcom.xml.FormatterFactory#getFormatter(com.aconex.gedcom.TreeNode)}. <p/>
 	 * 
 	 * Condition - data with level 3 <p/>
-	 * expected	- an instance of Level2ElementFormatter {@link com.aconex.gedcom.format.Level2ElementFormatter}. <p/>
+	 * expected	- an instance of Level2ElementFormatter {@link com.aconex.gedcom.xml.Level2ElementFormatter}. <p/>
 	 * actual	- an instance of Level2ElementFormatter. <p/>
 	 */
 	@Test

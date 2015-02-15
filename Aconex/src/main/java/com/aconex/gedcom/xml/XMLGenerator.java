@@ -1,4 +1,4 @@
-package com.aconex.gedcom.format;
+package com.aconex.gedcom.xml;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -57,7 +57,7 @@ public class XMLGenerator implements Generatable {
 	 * The row with Level 0 i.e. the 1st row is marked as parent node. All subsequent nodes at
 	 * the same level are marked as its children. In general, level n is the parent of all nodes at level n + 1.
 	 *
-	 * This TreeNode acts as a parent node which is further written as XML.{@link com.aconex.gedcom.format.XMLGenerator#writeXML}
+	 * This TreeNode acts as a parent node which is further written as XML.{@link com.aconex.gedcom.xml.XMLGenerator#writeXML}
 	 *
 	 * @param 	filePath
 	 * 			path of the output file.

@@ -20,7 +20,7 @@ import com.aconex.gedcom.util.FileUtil;
  * 			{@link com.aconex.gedcom.Configuration#DEFAULT_GEDCOM_DATA_FILE}
  * 			2. formats the data as XML
  * 			3. generates file with the name 'gedcom.xml'.
- * 			{@link com.aconex.gedcom.format.XMLGenerator#DEFAULT_OUTPUT_FILE}
+ * 			{@link com.aconex.gedcom.xml.XMLGenerator#DEFAULT_OUTPUT_FILE}
  *
  * @author tmishr
  */

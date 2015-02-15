@@ -1,7 +1,4 @@
-/**
- * 
- */
-package com.aconex.gedcom.format.test;
+package com.aconex.gedcom.xml.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -20,16 +17,16 @@ import javax.xml.stream.XMLStreamWriter;
 import org.junit.Test;
 
 import com.aconex.gedcom.TreeNode;
-import com.aconex.gedcom.format.Level0ElementFormatter;
+import com.aconex.gedcom.xml.Level1ElementFormatter;
 
 /**
- * The nodes used for formatting have already passed though validations.  
- * {@link com.aconex.gedcom.node.ParentNodeCreator#validate()} <p/>
+ * The nodes used for formatting have already passed though validations.
+ * {@link com.aconex.gedcom.node.ChildNodeCreator#validate()} <p/>
  * 
- * for validations,  refer {@link com.aconex.gedcom.node.test.ParentNodeCreatorTest}
+ * for validations, please refer {@link com.aconex.gedcom.node.test.ChildNodeCreatorTest} <p/>
  * @author tmishr
  */
-public class Level0ElementFormatterTest {
+public class Level1ElementFormatterTest {
 
 	/**
 	 * Condition: create XML element with attribute id/value. <p/>
@@ -41,13 +38,13 @@ public class Level0ElementFormatterTest {
 	public void testFormat() {
 		TreeNode node = new TreeNode();
 		node.setElementName("testElement");
-		node.addAttribute(TreeNode.ATTRIBUTE_ID, "@10001@");
-		Level0ElementFormatter formatter = new Level0ElementFormatter(node);
+		node.addAttribute(TreeNode.ATTRIBUTE_VALUE, "attrValue");
+		Level1ElementFormatter formatter = new Level1ElementFormatter(node);
 		XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
 		try {
 			// write xml
 			XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileWriter(
-					"src/test/resources/level0data.xml"));
+					"src/test/resources/level1data.xml"));
 			writer.writeStartDocument();
 			formatter.format(writer);
 			writer.writeEndElement();
@@ -58,7 +55,7 @@ public class Level0ElementFormatterTest {
 			// read xml
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 			XMLStreamReader streamReader = inputFactory.createXMLStreamReader(new FileReader(
-					"src/test/resources/level0data.xml"));
+					"src/test/resources/level1data.xml"));
 			while (streamReader.hasNext()) {
 				streamReader.next();
 				if (streamReader.getEventType() == XMLStreamReader.START_ELEMENT) {
@@ -66,13 +63,13 @@ public class Level0ElementFormatterTest {
 							streamReader.getLocalName());
 				}
 				if (streamReader.getEventType() == XMLStreamReader.ATTRIBUTE) {
-					assertEquals("attribute names must be same.", TreeNode.ATTRIBUTE_ID,
+					assertEquals("attribute names must be same.", TreeNode.ATTRIBUTE_VALUE,
 							streamReader.getAttributeName(0));
-					assertEquals("attribute values must be same.", "@10001@",
+					assertEquals("attribute values must be same.", "attrValue",
 							streamReader.getAttributeValue(0));
 				}
 			}
-			new File("src/test/resources/level0data.xml").delete();
+			new File("src/test/resources/level1data.xml").delete();
 		} catch (XMLStreamException e) {
 			e.printStackTrace();
 			fail("must not throw exception." + e.getMessage());

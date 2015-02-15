@@ -1,4 +1,4 @@
-package com.aconex.gedcom.format;
+package com.aconex.gedcom.xml;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

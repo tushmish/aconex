@@ -1,7 +1,7 @@
 package com.aconex.gedcom;
 
-import com.aconex.gedcom.format.XMLGenerator;
 import com.aconex.gedcom.util.StringUtil;
+import com.aconex.gedcom.xml.XMLGenerator;
 
 /**
  * represents the file format for the output data representation.
