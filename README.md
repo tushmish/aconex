@@ -6,8 +6,8 @@ Main file to generate XML file.
 **GedcomTestSuite.java**
 Main file run junit test cases. 
 
-# Sample configuration file 
-src/main/resources/config.properties
+# Config properties 
+**Sample configuration file** - src/main/resources/**config.properties**
 
 format of the output file to represent Genealogical data.
 **output.file.format**=XML
@@ -43,7 +43,7 @@ Run -> Maven install.
 # Generate XML	
 1. Generate XML using configuration file
 
-**java -jar aconex.jar <path_to_config_file>**	
+**java -jar aconex.jar path_to_config_file**
 
 2. Generate XML using default configuration.
 Generates XML file using default genealogical data file. XML file named gedcom.xml gets generated.
