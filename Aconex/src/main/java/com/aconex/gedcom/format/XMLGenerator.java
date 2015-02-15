@@ -18,6 +18,7 @@ import javax.xml.stream.XMLStreamWriter;
 
 import com.aconex.gedcom.BusinessException;
 import com.aconex.gedcom.DataMiner;
+import com.aconex.gedcom.Generatable;
 import com.aconex.gedcom.TreeNode;
 import com.aconex.gedcom.node.NodeFactory;
 import com.aconex.gedcom.util.StringUtil;

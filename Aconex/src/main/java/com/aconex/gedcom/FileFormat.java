@@ -1,6 +1,5 @@
 package com.aconex.gedcom;
 
-import com.aconex.gedcom.format.Generatable;
 import com.aconex.gedcom.format.XMLGenerator;
 import com.aconex.gedcom.util.StringUtil;
 

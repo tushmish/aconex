@@ -1,4 +1,4 @@
-package com.aconex.gedcom.format;
+package com.aconex.gedcom;
 
 import java.io.InputStream;
 

@@ -98,7 +98,7 @@ public class GedcomParserTest {
 	@Test
 	public final void testMainWithUnsupportedFileFormat() {
 		thrown.expect(BusinessException.class);
-		final String path = "/Users/tmishr/dev/workspace_luna/Aconex/src/test/resources/test-config-json.properties";
+		final String path = "src/test/resources/test-config-json.properties";
 		GedcomParser.main(new String[] { path });
 	}
 
